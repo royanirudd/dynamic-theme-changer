@@ -11,6 +11,7 @@ local function update_theme()
 	local mood = mood_detector.detect_mood()
 	local theme = M.config.themes[mood]
 	set_colorscheme(theme)
+	print("Current mood: " .. mood .. ", Theme: " .. theme) -- Added for debugging
 end
 
 function M.setup(opts)
@@ -19,17 +20,10 @@ function M.setup(opts)
 	-- Initial theme update
 	update_theme()
 
-	-- Set up auto-command for periodic updates
-	vim.api.nvim_create_autocmd("VimEnter", {
-		callback = function()
-			-- Delay the timer start to ensure it runs after lazy loading
-			vim.defer_fn(function()
-				vim.fn.timer_start(M.config.update_interval * 1000, function()
-					update_theme()
-				end, { ["repeat"] = -1 }) -- Repeat indefinitely
-			end, 100) -- 100ms delay
-		end,
-	})
+	-- Set up timer for periodic updates
+	vim.fn.timer_start(M.config.update_interval * 1000, function()
+		update_theme()
+	end, { ["repeat"] = -1 }) -- Repeat indefinitely
 end
 
 return M
