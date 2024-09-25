@@ -8,7 +8,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  "yourusername/dynamic-theme-changer",
+  "royanirudd/dynamic-theme-changer",
   dependencies = {
     "NLKNguyen/papercolor-theme",
     "ellisonleao/gruvbox.nvim",
