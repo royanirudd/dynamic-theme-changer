@@ -74,12 +74,4 @@ MIT
 
 Contributions are welcome! Please ask Pull Request
 
-
-For the next step, we could focus on adding more advanced features, such as:
-1. Ability to define custom actions to run when changing themes
-2. Integration with external APIs for mood detection
-3. Support for time-based theme changes alongside mood-based changes
-
-Let me know which direction you'd like to go next or if you have any other specific features in mind! 
-
 By: Anirudh Roy, India 
