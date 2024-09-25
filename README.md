@@ -40,8 +40,9 @@ require("dynamic-theme-changer").setup({
     debug = false,  -- Set to true to enable debug messages
     custom_logic = nil  -- Optional: function that returns a mood string
 })
-
+-- PLEASE UPDATE 60 TO YOUR SUITING 
 ```
+
 
 ### Options
 
