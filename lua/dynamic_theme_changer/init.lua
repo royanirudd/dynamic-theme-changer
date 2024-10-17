@@ -8,11 +8,12 @@ local function set_colorscheme(theme)
 end
 
 local function update_theme()
-	local mood = M.config.custom_logic and M.config.custom_logic() or mood_detector.detect_mood()
-	local theme = M.config.themes[mood]
+	local mood_number = M.config.custom_logic and M.config.custom_logic() or mood_detector.detect_mood()
+	local theme = M.config.themes[mood_number]
 	set_colorscheme(theme)
 	if M.config.debug then
-		print("Current mood: " .. mood .. ", Theme: " .. theme)
+		local mood_name = M.config.mood_names[mood_number]
+		print("Current mood: " .. mood_name .. " (" .. mood_number .. "), Theme: " .. theme)
 	end
 end
 

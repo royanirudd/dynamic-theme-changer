@@ -1,12 +1,10 @@
 local M = {}
 
-local moods = { "energetic", "focused", "relaxed", "calm" }
-local current_index = 1
+local current_mood = 0
 
 function M.detect_mood()
-	local mood = moods[current_index]
-	current_index = (current_index % #moods) + 1
-	return mood
+	current_mood = (current_mood % 4) + 1
+	return current_mood
 end
 
 return M
