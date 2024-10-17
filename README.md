@@ -65,6 +65,55 @@ require("dynamic-theme-changer").setup({
 
 ```
 
+## Example custom_logic based on file extensions
+Using lazy
+```lua
+{
+  "royanirudd/dynamic-theme-changer",
+  dependencies = {
+    "NLKNguyen/papercolor-theme",
+    "ellisonleao/gruvbox.nvim",
+    "folke/tokyonight.nvim",
+    "EdenEast/nightfox.nvim",
+  },
+  config = function()
+    local file_extension_themes = {
+      cs = 1,     -- C# files use the "energetic" theme (PaperColor)
+      py = 2,     -- Python files use the "focused" theme (gruvbox)
+      js = 3,     -- JavaScript files use the "relaxed" theme (tokyonight)
+      tex = 4,    -- LaTeX files use the "calm" theme (nightfox)
+      -- Add more file extensions and corresponding mood numbers as needed
+    }
+
+    require("dynamic-theme-changer").setup({
+      themes = {
+        [1] = "PaperColor",  -- energetic
+        [2] = "gruvbox",     -- focused
+        [3] = "tokyonight",  -- relaxed
+        [4] = "nightfox"     -- calm
+      },
+      update_interval = 60,  -- Update theme every minute (in seconds)
+      debug = true,  -- Set to true to enable debug messages
+      custom_logic = function()
+        local file_extension = vim.fn.expand("%:e")
+        return file_extension_themes[file_extension] or (os.time() % 4 + 1)
+      end
+    })
+
+    -- Set up autocmd to update theme on buffer enter
+    vim.cmd([[
+      augroup DynamicThemeChanger
+        autocmd!
+        autocmd BufEnter * lua require('dynamic-theme-changer').update_theme()
+      augroup END
+    ]])
+  end,
+  priority = 1000,
+  lazy = false,
+}
+
+```
+
 ## Mood Numbers
 The plugin uses the following mood numbers:
 1. Energetic
