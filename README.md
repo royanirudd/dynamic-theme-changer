@@ -28,17 +28,16 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 You can customize the plugin by passing options to the steup function:
 
 ```lua
-
 require("dynamic-theme-changer").setup({
     themes = {
-        energetic = "PaperColor",
-        focused = "gruvbox",
-        relaxed = "tokyonight",
-        calm = "nightfox"
+        [1] = "PaperColor",  -- energetic
+        [2] = "gruvbox",     -- focused
+        [3] = "tokyonight",  -- relaxed
+        [4] = "nightfox"     -- calm
     },
     update_interval = 60,  -- Update theme every minute (in seconds)
     debug = false,  -- Set to true to enable debug messages
-    custom_logic = nil  -- Optional: function that returns a mood string
+    custom_logic = nil  -- Optional: function that returns a mood number (1-4)
 })
 -- PLEASE UPDATE 60 TO YOUR SUITING 
 ```
@@ -46,29 +45,37 @@ require("dynamic-theme-changer").setup({
 
 ### Options
 
-- themes: A table mapping moods to colorscheme names.
+- themes: A table mapping mood numbers to colorscheme names.
 - update_interval: How often to update the theme, in seconds.
 - debug: If true, print debug messages when changing themes.
-- custom_logic: A function that returns a mood string. If provided, this will be used instead of the default mood detection.
+- custom_logic: A function that returns a mood number (1-4). If provided, this will be used instead of the default mood detection.
 
 ## Custom Mood Detection
 
-You can provide your own mood detection logic by setting the custom_logic option. This should be a function that returns one of the mood strings used in your themes configuration.
+You can provide your own mood detection logic by setting the custom_logic option. This should be a function that returns a number from 1 to 4, corresponding to the mood indices in your themes configuration.
 
 Example:
 ```lua
-
 require("dynamic-theme-changer").setup({
     custom_logic = function()
         -- Your custom logic here
-        return "energetic"  -- or "focused", "relaxed", "calm"
+        return math.random(1, 4)  -- Returns a random mood number
     end
 })
 
 ```
 
-## License
-MIT
+## Mood Numbers
+The plugin uses the following mood numbers:
+1. Energetic
+2. Focused
+3. Relaxed
+4. Calm
+
+## Todos
+- Remove "Mood" Logic all together
+- Add commands to detect current output number
+- Improve debugging to be more verbose
 
 ## Contributing 
 
